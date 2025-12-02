@@ -5,23 +5,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\GejalaController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Autentikasi default Laravel (login, register, dll)
 Auth::routes();
 
-// Setelah login, redirect ke halaman diagnosa
-Route::get('/home', [DiagnosaController::class, 'index'])->name('home');
+// Route default ke diagnosa
+Route::get('/', [DiagnosaController::class, 'index'])->name('home');
 
-// Semua fitur hanya bisa diakses jika sudah login
+// Semua fitur hanya untuk user login
 Route::middleware(['auth'])->group(function () {
     // Diagnosa
     Route::get('/diagnosa', [DiagnosaController::class, 'index'])->name('diagnosa.index');
