@@ -3,7 +3,7 @@
 @section('content')
 <style>
     body {
-        background-color: #a9cce3; /* biru muda seperti di gambar */
+        background-color: #a9cce3;
     }
 </style>
 
@@ -30,7 +30,7 @@
 
                             {{-- Name --}}
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nama</label>
+                                <label for="name" class="form-label">Nama Lengkap</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" required autofocus>
                                 @error('name')
@@ -38,13 +38,15 @@
                                 @enderror
                             </div>
 
-                            {{-- Email --}}
+                            {{-- Username --}}
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input id="email" type="email"
-                                    class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required>
-                                @error('email')
+                                <label for="username" class="form-label">Username</label>
+                                <input id="username" type="text"
+                                    class="form-control @error('username') is-invalid @enderror"
+                                    name="username" value="{{ old('username') }}" required
+                                    placeholder="Masukkan username">
+                                <small class="text-muted">Username akan digunakan untuk login</small>
+                                @error('username')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -53,7 +55,8 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" required>
+                                    class="form-control @error('password') is-invalid @enderror" 
+                                    name="password" required>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -84,4 +87,36 @@
         </div>
     </div>
 </div>
+
+{{-- JavaScript untuk validasi username --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const usernameInput = document.getElementById('username');
+    
+    // Mencegah input karakter @ di username
+    usernameInput.addEventListener('input', function() {
+        this.value = this.value.replace(/@/g, '');
+    });
+    
+    // Validasi saat submit
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const username = usernameInput.value.trim();
+        
+        // Validasi: username tidak boleh kosong
+        if (!username) {
+            e.preventDefault();
+            alert('Username tidak boleh kosong');
+            return;
+        }
+        
+        // Validasi: username tidak boleh mengandung spasi
+        if (username.includes(' ')) {
+            e.preventDefault();
+            alert('Username tidak boleh mengandung spasi');
+            return;
+        }
+    });
+});
+</script>
 @endsection

@@ -15,19 +15,20 @@
                     <!-- Form Login di Kanan -->
                     <div class="col-md-6 p-4">
                         <div class="text-center mb-4">
-                            <h5 class="fw-bold text-primary">Login to Your Account</h5>
+                            <h5 class="fw-bold text-primary">Login ke Akun Anda</h5>
                         </div>
 
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
-                            <!-- Email -->
+                            <!-- Username -->
                             <div class="mb-3">
-                                <label for="email" class="form-label text-dark">Email Address</label>
-                                <input id="email" type="email"
-                                    class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
+                                <label for="username" class="form-label text-dark">Username</label>
+                                <input id="username" type="text"
+                                    class="form-control @error('username') is-invalid @enderror"
+                                    name="username" value="{{ old('username') }}" required autocomplete="username" autofocus
+                                    placeholder="Masukkan username Anda">
+                                @error('username')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -52,7 +53,7 @@
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                     {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label text-dark" for="remember">
-                                    Remember Me
+                                    Ingat Saya
                                 </label>
                             </div>
 
@@ -64,7 +65,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="text-decoration-none text-primary" href="{{ route('password.request') }}">
-                                        Forgot Password?
+                                        Lupa Password?
                                     </a>
                                 @endif
                             </div>
@@ -73,8 +74,8 @@
                         <!-- Register Link -->
                         <div class="text-center mt-3">
                             <small class="text-dark">
-                                Don't have an account?
-                                <a href="{{ route('register') }}" class="text-primary">Register here</a>
+                                Belum punya akun?
+                                <a href="{{ route('register') }}" class="text-primary">Daftar di sini</a>
                             </small>
                         </div>
                     </div>
